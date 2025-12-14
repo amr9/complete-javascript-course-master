@@ -22,4 +22,23 @@
 // lastName = "emad";
 // console.log(lastName); //this works
 
+const now = 2037;
+const age = now - 1991;
+const age2 = now - 2018;
+console.log(age, age2);
+console.log(age * 2, age2 / 10, 2 ** 3);
 
+const firstName = "amr";
+const lastName = "emad";
+
+console.log(firstName + " " + lastName);
+
+let x = 15;
+x += 10;
+x *= 4;
+x++;
+x--;
+x--;
+console.log(x);
+
+console.log(age > age2);
