@@ -22,23 +22,72 @@
 // lastName = "emad";
 // console.log(lastName); //this works
 
-const now = 2037;
-const age = now - 1991;
-const age2 = now - 2018;
-console.log(age, age2);
-console.log(age * 2, age2 / 10, 2 ** 3);
+// const now = 2037;
+// const age = now - 1991;
+// const age2 = now - 2018;
+// console.log(age, age2);
+// console.log(age * 2, age2 / 10, 2 ** 3);
+
+// const firstName = "amr";
+// const lastName = "emad";
+
+// console.log(firstName + " " + lastName);
+
+// let x = 15;
+// x += 10;
+// x *= 4;
+// x++;
+// x--;
+// x--;
+// console.log(x);
+
+// console.log(age > age2);
+
 
 const firstName = "amr";
-const lastName = "emad";
+const job = "developer";
+const birthYear = 1999;
+const year = 2024;
 
-console.log(firstName + " " + lastName);
+const amr = "I'm " + firstName + ", a " + (year - birthYear) + " years old " + job + "!";
+console.log(amr);
 
-let x = 15;
-x += 10;
-x *= 4;
-x++;
-x--;
-x--;
-console.log(x);
 
-console.log(age > age2);
+const amrNew = `I'm ${firstName}, a ${year - birthYear} years old ${job}!`;
+console.log(amrNew);
+
+
+console.log(`Just a regular string...`);
+
+console.log('String with \n\
+multiple \n\
+lines'); // old way
+
+
+console.log(`String
+multiple
+lines`); // new way with template literals
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
