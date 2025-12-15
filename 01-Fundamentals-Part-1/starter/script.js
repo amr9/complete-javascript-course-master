@@ -69,9 +69,26 @@ multiple
 lines`); // new way with template literals
 
 
+const day = 'dd';
 
-
-
+switch (day) {
+    case 'monday':
+        console.log(`stuff to do`)
+        console.log(`other stuff to do`)
+        break
+    case 'tuesday':
+        console.log(`soon to do stuff`)
+        break
+    case 'wednesday':
+    case 'thursday':
+        console.log(`5roga time`)
+        break
+    case 'friday':
+        console.log(`agaza time`)
+        break
+    default:
+        console.log(`mormmal day please 😒!!`)
+}
 
 
 

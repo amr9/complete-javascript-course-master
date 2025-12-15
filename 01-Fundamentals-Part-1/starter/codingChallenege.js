@@ -61,7 +61,12 @@ else {
 
 //coding Challenge #4
 
+const bill = 275;
 
+let tip = 0;
+bill >= 50 && bill <= 300 ? tip = bill * 0.15 : tip = bill * 0.20;
+
+console.log(`The bill was ${bill}, the tip was ${tip}, and the total value ${bill + tip}`)
 
 
 
