@@ -32,12 +32,20 @@ let z = (fruitProcesssor("apple", "orange"))
 // console.log(z)
 
 
+const age1 = calcAge(2000)
+
+function calcAge(birthYear) {
+    return 2025 - birthYear
+}
 
 
+console.log(age1)
 
+const calcAge2 = function (birthYear) {
+    return 2025 - birthYear
+}
 
-
-
+console.log(calcAge2(1991))
 
 
 
