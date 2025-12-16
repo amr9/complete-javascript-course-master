@@ -62,20 +62,58 @@ else {
 
 
 // Assignment: Type Conversion and Coercion
-console.log('9' - '5'); // -> 4
-console.log('19' - '13' + '17'); // -> 617
-console.log('19' - '13' + 17); // -> 23
-console.log('123' < 57); // -> False
-console.log(5 + 6 + '4' + 9 - 4 - 2); // -> 1143
+// console.log('9' - '5'); // -> 4
+// console.log('19' - '13' + '17'); // -> 617
+// console.log('19' - '13' + 17); // -> 23
+// console.log('123' < 57); // -> False
+// console.log(5 + 6 + '4' + 9 - 4 - 2); // -> 1143
 
 
+// Assignment: Equality Operators: == vs. ===
+// const numNeighbours = Number(prompt(`How many neighbour countries does your contry have?`))
+
+// if (numNeighbours === 1) {
+//     console.log(`Only 1 border!`)
+// }
+// else if (numNeighbours > 1) {
+//     console.log(`More than 1 border`)
+// }
+// else {
+//     console.log(`No borders`)
+// }
+
+//Assignment: Logical Operators
+if (language === "English" && population < (50 * 1000000) && isIsland === false) {
+    console.log(`You should live in ${country} :)`)
+}
+else {
+    console.log(`${country} does not meet your criteria :(`)
+}
+
+//Assignment: The switch Statement
+
+switch (language) {
+    case 'Chinese':
+    case 'Mandarin':
+        console.log(`MOST number of native speakers!`)
+        break
+    case 'Spanish':
+        console.log(`2nd place in number of native speakers`)
+        break
+    case 'English':
+        console.log(`3rd place`)
+        break
+    case 'Arabic':
+        console.log(`5th most spoken language`)
+        break
+    default:
+        console.log(`Great language too :D`)
+}
 
 
+//Assignment: The Conditional (Ternary) Operator
 
-
-
-
-
+population > (33 * 1000000) ? console.log(`${country}'s population is above average`) : console.log(`${country}'s population is below average`)
 
 
 
