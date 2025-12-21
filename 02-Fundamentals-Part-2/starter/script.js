@@ -39,19 +39,34 @@ function calcAge(birthYear) {
 }
 
 
-console.log(age1)
+// console.log(age1)
 
 const calcAge2 = function (birthYear) {
     return 2025 - birthYear
 }
 
-console.log(calcAge2(1991))
+// console.log(calcAge2(1991))
 
 
+const friends = ["Michael", "Steven", "Peter"]
+console.log(friends[0])
+
+const years = new Array(1991, 1984, 2008, 2020);
+console.log(years.length)
 
 
+const amrObject = {
+    firstName: "Amr",
+    lastName: "Emad",
+    age: 2025 - 2000,
+    friends: ["Michael", "Steven", "Peter"]
+};
 
+console.log(amrObject);
 
+console.log(amrObject.lastName);
+console.log(amrObject['lastName']);
 
-
+const nameKey = 'Name';
+console.log(amrObject['first' + nameKey]);
 
