@@ -70,3 +70,12 @@ console.log(amrObject['lastName']);
 const nameKey = 'Name';
 console.log(amrObject['first' + nameKey]);
 
+const intrestedIN = prompt(`What do you want to know about Amr? Choose between firstName, lastName, age, and friends`);
+
+console.log(amrObject[intrestedIN]);
+
+if (amrObject[intrestedIN]) {
+    console.log(amrObject[intrestedIN]);
+} else {
+    console.log('Wrong request! Choose between firstName, lastName, age, and friends');
+}
