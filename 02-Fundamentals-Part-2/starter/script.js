@@ -58,7 +58,8 @@ console.log(years.length)
 const amrObject = {
     firstName: "Amr",
     lastName: "Emad",
-    age: 2025 - 2000,
+    // age: 2025 - 2000,
+    birthYear: 2000,
     friends: ["Michael", "Steven", "Peter"]
 };
 
@@ -70,15 +71,47 @@ console.log(amrObject['lastName']);
 const nameKey = 'Name';
 console.log(amrObject['first' + nameKey]);
 
-const intrestedIN = prompt(`What do you want to know about Amr? Choose between firstName, lastName, age, and friends`);
+// const intrestedIN = prompt(`What do you want to know about Amr? Choose between firstName, lastName, age, and friends`);
 
-console.log(amrObject[intrestedIN]);
+// console.log(amrObject[intrestedIN]);
 
-if (amrObject[intrestedIN]) {
-    console.log(amrObject[intrestedIN]);
-} else {
-    console.log('Wrong request! Choose between firstName, lastName, age, and friends');
-}
+// if (amrObject[intrestedIN]) {
+//     console.log(amrObject[intrestedIN]);
+// } else {
+//     console.log('Wrong request! Choose between firstName, lastName, age, and friends');
+// }
 
 console.log(`${amrObject.firstName} has ${amrObject.friends.length} friends,
-and his best friend is called ${amrObject.friends.at(0)}`);   
+and his best friend is called ${amrObject.friends.at(0)}`);
+
+amrObject.calcAge = function () {
+    // console.log(this);
+    return this.age = 2025 - this.birthYear;
+};
+
+console.log(amrObject.calcAge());
+console.log(amrObject.age);
+
+// console.log(amrObject['calcAge'](2000));
+
+amrObject.getSummary = function () {
+    return `${this.firstName} is a ${this.calcAge()}-year old person, and he has ${this.friends.length} friends.`
+};
+
+console.log(amrObject.getSummary());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
