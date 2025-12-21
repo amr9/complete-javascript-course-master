@@ -79,3 +79,6 @@ if (amrObject[intrestedIN]) {
 } else {
     console.log('Wrong request! Choose between firstName, lastName, age, and friends');
 }
+
+console.log(`${amrObject.firstName} has ${amrObject.friends.length} friends,
+and his best friend is called ${amrObject.friends.at(0)}`);   
