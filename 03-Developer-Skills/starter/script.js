@@ -4,7 +4,7 @@
 const x = "23";
 if (x === 23) console.log("This is correct!");
 
-console.log();
+console.log("Hello World!");
 
 // BUG
 // TODO
