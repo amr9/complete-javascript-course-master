@@ -16,6 +16,7 @@ printForcast(test2);
 //challenge #2
 
 function workHours(hoursArray) {
+  const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   let totalHours = 0;
   let max = 0;
   let daysWorked = 0;
@@ -38,7 +39,13 @@ function workHours(hoursArray) {
   }
 
   const averageHours = totalHours / hoursArray.length;
-  console.log(totalHours, averageHours, max, daysWorked, isWeekFullTime);
+  console.log(
+    totalHours,
+    averageHours,
+    days[hoursArray.indexOf(max)],
+    daysWorked,
+    isWeekFullTime
+  );
 }
 
 workHours([7.5, 8, 6.5, 0, 8.5, 4, 0]);
