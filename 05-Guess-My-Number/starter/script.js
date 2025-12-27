@@ -10,6 +10,7 @@
 // document.querySelector('.guess').value = 23;
 // console.log(document.querySelector('.guess').value);
 
+//project #1: Guess My Number!
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
 let scored = 20;
 let highscore = 0;
