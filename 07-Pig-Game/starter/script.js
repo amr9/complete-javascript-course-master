@@ -11,7 +11,7 @@ const playSection0 = document.querySelector('.player--0');
 const playSection1 = document.querySelector('.player--1');
 
 let score = 0;
-let total = 0;
+let total = [90, 0];
 let activePlayer = 0;
 diceImage.classList.add('hidden');
 
@@ -22,35 +22,46 @@ const clickBtnNew = function () {
   currentScore1.textContent = '0';
   playSection0.classList.add('player--active');
   playSection1.classList.remove('player--active');
+  playSection0.classList.remove('player--winner');
+  playSection1.classList.remove('player--winner');
   diceImage.classList.add('hidden');
-  total = 0;
+  total = [0, 0];
+  activePlayer = 0;
 };
 
 const clickBtnRoll = function () {
-  let random = Math.trunc(Math.random() * 6) + 1;
-  diceImage.src = `dice-${random}.png`;
-  diceImage.classList.remove('hidden');
-  console.log(random);
-  if (random === 1) {
-    document.querySelector(`#score--${activePlayer}`).textContent = '0';
-    score = 0;
+  if (total[activePlayer] < 100) {
+    let random = Math.trunc(Math.random() * 6) + 1;
+    diceImage.src = `dice-${random}.png`;
+    diceImage.classList.remove('hidden');
+    if (random === 1) {
+      document.querySelector(`#score--${activePlayer}`).textContent = '0';
+      score = 0;
 
-    activePlayer = activePlayer === 0 ? 1 : 0;
-    playSection0.classList.toggle('player--active');
-    playSection1.classList.toggle('player--active');
-  } else {
-    score += random;
-    document.querySelector(`#score--${activePlayer}`).textContent = score;
+      activePlayer = activePlayer === 0 ? 1 : 0;
+      playSection0.classList.toggle('player--active');
+      playSection1.classList.toggle('player--active');
+    } else {
+      score += random;
+      document.querySelector(`#score--${activePlayer}`).textContent = score;
+    }
   }
 };
 
 const clickBtnHold = function () {
-  if (score !== 0) {
-    total += score;
-    document.querySelector(`#current--${activePlayer}`).textContent = total;
+  if (score !== 0 && total[activePlayer] < 100) {
+    console.log(score);
+    total[activePlayer] += score;
+    document.querySelector(`#current--${activePlayer}`).textContent =
+      total[activePlayer];
     document.querySelector(`#score--${activePlayer}`).textContent = '0';
     score = 0;
     diceImage.classList.add('hidden');
+    if (total[activePlayer] >= 100) {
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.add('player--winner');
+    }
   }
 };
 
