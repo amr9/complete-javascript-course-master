@@ -11,7 +11,7 @@ const playSection0 = document.querySelector('.player--0');
 const playSection1 = document.querySelector('.player--1');
 
 let score = 0;
-let total = [90, 0];
+let total = [0, 0];
 let activePlayer = 0;
 diceImage.classList.add('hidden');
 
