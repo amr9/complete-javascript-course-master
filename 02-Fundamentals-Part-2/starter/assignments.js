@@ -1,4 +1,4 @@
-"strict-mode";
+"use strict";
 //functions
 
 function describeCountry(country, population, capitalCity) {
