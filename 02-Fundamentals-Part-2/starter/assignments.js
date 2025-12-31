@@ -46,3 +46,23 @@ function describePopulation(country, population) {
 }
 console.log(describePopulation("China", 1441));
 //Introduction to Arrays
+const populationArray = [1441, 3578, 222, 110];
+console.log(populationArray.length === 4 ? true : false);
+const percentageArray = [];
+for (let i = 0; i < populationArray.length; i++) {
+  percentageArray.push(
+    Number(percentageOfWorld1(populationArray[i]).toFixed(1))
+  );
+}
+console.log(percentageArray);
+//Basic Array Operations (Methods)
+const neighbours = ["Egypt", "Libya", "Sudan"];
+neighbours.push("Utopia");
+neighbours.pop();
+if (!neighbours.includes("Germany")) {
+  console.log("Probably not a central european country :D");
+}
+neighbours[neighbours.indexOf("Egypt")] = "Masr";
+console.log(neighbours);
+
+//
