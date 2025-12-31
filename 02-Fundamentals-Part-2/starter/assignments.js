@@ -1,5 +1,4 @@
 "strict-mode";
-
 //functions
 
 function describeCountry(country, population, capitalCity) {
@@ -99,3 +98,51 @@ console.log(myCountry);
 myCountry.describe();
 myCountry.checkIsland();
 console.log(myCountry.isIsland);
+
+//Iteration: The for Loop
+for (let i = 1; i <= 50; i++) {
+  console.log(`Voter number ${i} is currently voting`);
+}
+
+//Looping Arrays, Breaking and Continuing
+const percentageArray2 = [];
+for (let i = 0; i < populationArray.length; i++) {
+  percentageArray2.push(percentageOfWolrd2(populationArray[i]));
+}
+console.log(percentageArray2);
+
+//Looping Backwards and Loops in Loops
+const listOfNeighbours = [
+  ["Canada", "Mexico"],
+  "Spain",
+  ["Norway", "Sweden", "Russia"],
+];
+//this is used if elements are mix beteween arrays and normal strings
+// for (let i = 0; i < listOfNeighbours.length; i++) {
+//   if (typeof listOfNeighbours[i] === "object") {
+//     for (let j = 0; j < listOfNeighbours[i].length; j++)
+//       console.log(listOfNeighbours[i][j]);
+//   } else {
+//     console.log(listOfNeighbours[i]);
+//   }
+// }
+
+//this is used if all elements are arrays
+// for (let i = 0; i < listOfNeighbours.length; i++)
+//   for (let y = 0; y < listOfNeighbours[i].length; y++)
+//     console.log(`Neighbour: ${listOfNeighbours[i][y]}`);
+
+//The while Loop
+let index1 = 0;
+while (index1 < listOfNeighbours.length) {
+  if (typeof listOfNeighbours[index1] === "object") {
+    let index2 = 0;
+    while (index2 < listOfNeighbours[index1].length) {
+      console.log(listOfNeighbours[index1][index2]);
+      index2++;
+    }
+  } else {
+    console.log(listOfNeighbours[index1]);
+  }
+  index1++;
+}
