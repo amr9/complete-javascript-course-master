@@ -29,7 +29,9 @@ const restaurant = {
   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
-
+  order: function (startIndex, mainIndex) {
+    return [this.starterMenu[startIndex], this.mainMenu[mainIndex]];
+  },
   openingHours: {
     thu: {
       open: 12,
@@ -45,3 +47,40 @@ const restaurant = {
     },
   },
 };
+const arr = [1, 2, 3];
+const a = arr[0];
+const b = arr[1];
+const c = arr[2];
+
+const [x, y, z] = arr;
+console.log(x, y, z);
+let [main, , secondary] = restaurant.categories;
+console.log(main, secondary);
+
+//How to switch variables two different ways (destructing array is better for more than 2 variabls)
+
+// const temp = main;
+// main = secondary;
+// secondary = temp;
+// console.log(main, secondary);
+
+[main, secondary] = [secondary, main];
+console.log(main, secondary);
+
+const [starter, course] = restaurant.order(2, 0);
+console.log(starter, course);
+
+//nested destruct
+const nested = [6, 3, 6, [7, 9]];
+// const [first, arrayNest] = [nested[0], nested[3]];
+// console.log(first, arrayNest);
+
+const [o, , , [p, l]] = nested;
+console.log(o, p, l);
+const [i, j, k] = [nested[0], nested[3][0], nested[3][1]];
+console.log(i, j, k);
+
+//default values
+
+const [f = 1, g = 1, h = 1] = [8, 9];
+console.log(f, g, h);
