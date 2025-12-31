@@ -65,4 +65,37 @@ if (!neighbours.includes("Germany")) {
 neighbours[neighbours.indexOf("Egypt")] = "Masr";
 console.log(neighbours);
 
-//
+//Introduction to Objects
+
+const myCountry = {
+  country: "Egypt",
+  capital: "Cairo",
+  language: "Arabic",
+  population: 110,
+  neighbours: neighbours,
+  describe: function () {
+    console.log(
+      `${myCountry.country} has ${myCountry.population} million ${myCountry.language}-speaking people,${myCountry.neighbours.length} neighbouring countries and a capital called ${myCountry.capital}`
+    );
+  },
+  checkIsland: function () {
+    this.isIsland = this.neighbours ? true : false;
+  },
+};
+
+console.log(myCountry);
+
+//Dot vs. Bracket Notation
+// console.log(
+//   `${myCountry.country} has ${myCountry.population} million ${myCountry.language}-speaking people,${myCountry.neighbours.length} neighbouring countries and a capital called ${myCountry.capital}`
+// );
+
+myCountry.population += 2;
+console.log(myCountry);
+myCountry["population"] -= 2;
+console.log(myCountry);
+
+//Object Methods
+myCountry.describe();
+myCountry.checkIsland();
+console.log(myCountry.isIsland);
