@@ -32,6 +32,9 @@ const restaurant = {
   order: function (startIndex, mainIndex) {
     return [this.starterMenu[startIndex], this.mainMenu[mainIndex]];
   },
+  orderDelivery: function (obj) {
+    console.log(obj);
+  },
   openingHours: {
     thu: {
       open: 12,
@@ -47,15 +50,15 @@ const restaurant = {
     },
   },
 };
-const arr = [1, 2, 3];
-const a = arr[0];
-const b = arr[1];
-const c = arr[2];
+// const arr = [1, 2, 3];
+// const a = arr[0];
+// const b = arr[1];
+// const c = arr[2];
 
-const [x, y, z] = arr;
-console.log(x, y, z);
-let [main, , secondary] = restaurant.categories;
-console.log(main, secondary);
+// const [x, y, z] = arr;
+// console.log(x, y, z);
+// let [main, , secondary] = restaurant.categories;
+// console.log(main, secondary);
 
 //How to switch variables two different ways (destructing array is better for more than 2 variabls)
 
@@ -64,8 +67,8 @@ console.log(main, secondary);
 // secondary = temp;
 // console.log(main, secondary);
 
-[main, secondary] = [secondary, main];
-console.log(main, secondary);
+// [main, secondary] = [secondary, main];
+// console.log(main, secondary);
 
 const [starter, course] = restaurant.order(2, 0);
 console.log(starter, course);
@@ -84,3 +87,21 @@ console.log(i, j, k);
 
 const [f = 1, g = 1, h = 1] = [8, 9];
 console.log(f, g, h);
+
+const { menu = [], starterMenu: starters = [] } = restaurant;
+
+console.log(menu, starters);
+
+let a = 111;
+let b = 999;
+
+const obj = { a: 23, b: 7, c: 14 };
+console.log(a, b);
+({ a, b } = obj);
+console.log(a, b);
+const { openingHours } = restaurant;
+const {
+  fri: { open: openers, close },
+} = openingHours;
+
+console.log(openers, close);
