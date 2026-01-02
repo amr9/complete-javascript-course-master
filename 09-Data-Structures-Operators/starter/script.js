@@ -142,3 +142,43 @@ add(...X);
 
 restaurant.orderPizza('mushrooms', 'onion', 'cheese', 'tomato');
 restaurant.orderPizza('bruhs');
+
+console.log(3 || 'Amr'); // 3
+console.log(undefined || null); //null
+console.log(undefined || 0 || '' || 'hello' || null); //hello
+
+restaurant.numGuests = 0;
+const guests = restaurant.numGuests || 10;
+console.log(guests);
+
+const guestsCorrect = restaurant.numGuests ?? 10;
+console.log(guestsCorrect);
+
+const rest1 = {
+  name: 'Capri',
+  // numGuests: 20,
+  numGuests: 0,
+};
+
+const rest2 = {
+  name: 'La piazza',
+  owner: 'Amr Emad',
+};
+
+// rest2.numGuests = rest2.numGuests || 10;
+// rest1.numGuests = rest1.numGuests || 10;
+
+// rest1.numGuests ||= 10;
+// rest2.numGuests ||= 10;
+
+rest1.numGuests ??= 10;
+rest2.numGuests ??= 10;
+
+// rest2.owner = rest2.owner && 'nobody knows';
+// rest1.owner = rest1.owner && 'nobody knows';
+
+rest2.owner &&= 'nobody knows';
+rest1.owner &&= 'nobody knows';
+
+console.log(rest1);
+console.log(rest2);
