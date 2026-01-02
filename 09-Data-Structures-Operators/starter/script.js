@@ -92,7 +92,10 @@ console.log(i, j, k);
 const [f = 1, g = 1, h = 1] = [8, 9];
 console.log(f, g, h);
 
-const { menu = [], starterMenu: starters = [] } = restaurant;
+const {
+  starterMenu: starters = [],
+  menu = [...starters, ...restaurant.mainMenu],
+} = restaurant;
 
 console.log(menu, starters);
 
@@ -182,3 +185,12 @@ rest1.owner &&= 'nobody knows';
 
 console.log(rest1);
 console.log(rest2);
+
+for (const item of menu) {
+  console.log(item);
+}
+for (const [index, element] of menu.entries()) {
+  console.log(index, element);
+}
+console.log(menu.entries());
+console.log(...menu.entries());
