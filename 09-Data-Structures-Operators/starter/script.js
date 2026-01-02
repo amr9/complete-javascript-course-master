@@ -1,5 +1,5 @@
 'use strict';
-
+const weekdays = ['sat', 'sun', 'mon', 'tue', 'wed', 'thu', 'fri'];
 // Data needed for a later exercise
 const flights =
   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
@@ -22,6 +22,21 @@ const mexicanFoods = new Set([
   'garlic',
 ]);
 
+const openingHours = {
+  [weekdays[5]]: {
+    open: 12,
+    close: 22,
+  },
+  fri: {
+    open: 11,
+    close: 23,
+  },
+  [weekdays[0]]: {
+    open: 0, // Open 24 hours
+    close: 12 + 12,
+  },
+};
+
 // Data needed for first part of the section
 const restaurant = {
   name: 'Classico Italiano',
@@ -39,20 +54,7 @@ const restaurant = {
     console.log(mainIngredient);
     console.log(otherIngredient);
   },
-  openingHours: {
-    thu: {
-      open: 12,
-      close: 22,
-    },
-    fri: {
-      open: 11,
-      close: 23,
-    },
-    sat: {
-      open: 0, // Open 24 hours
-      close: 24,
-    },
-  },
+  openingHours,
 };
 // const arr = [1, 2, 3];
 // const a = arr[0];
@@ -106,7 +108,7 @@ const obj = { a: 23, b: 7, c: 14 };
 console.log(a, b);
 ({ a, b } = obj);
 console.log(a, b);
-const { openingHours } = restaurant;
+// const { openingHours } = restaurant;
 const {
   fri: { open: openers, close },
 } = openingHours;
@@ -125,8 +127,8 @@ const [pizza, , risotto, ...otherFood] = [
 ];
 console.log(pizza, risotto, otherFood);
 
-const { sat, ...weekdays } = openingHours;
-console.log(weekdays);
+const { sat, ...weekdayss } = openingHours;
+console.log(weekdayss);
 
 const add = function (...numbers) {
   let sum = 0;
