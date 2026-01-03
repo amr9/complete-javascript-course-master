@@ -196,3 +196,25 @@ for (const [index, element] of menu.entries()) {
 }
 console.log(menu.entries());
 console.log(...menu.entries());
+if (restaurant.openingHours.mon) {
+  console.log(restaurant.openingHours.mon.open);
+}
+//optional chaining
+console.log(restaurant.openingHours.mon?.open);
+
+console.log(restaurant.openingHours?.mon?.open);
+const days = ['sat', 'sun', 'mon', 'tue', 'wed', 'thu', 'fri'];
+
+for (const day of days) {
+  const open = restaurant.openingHours[day]?.open ?? 'no work';
+  console.log(day, open);
+}
+
+//chaining for methods
+console.log(restaurant.order?.(0, 1) ?? "method doesn't exist");
+console.log(restaurant.orderrisotto?.(0, 1) ?? "method doesn't exist");
+//arrays
+const users = [{ name: 'amr' }];
+
+console.log(users[0]?.name ?? "user don't exist");
+console.log(users[4]?.name ?? "user don't exist");
