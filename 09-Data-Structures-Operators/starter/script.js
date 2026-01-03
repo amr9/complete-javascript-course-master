@@ -218,3 +218,23 @@ const users = [{ name: 'amr' }];
 
 console.log(users[0]?.name ?? "user don't exist");
 console.log(users[4]?.name ?? "user don't exist");
+
+//property names
+const properties = Object.keys(openingHours);
+console.log(properties);
+for (const day of Object.keys(openingHours)) {
+  console.log(day);
+}
+
+//property values
+const values = Object.values(openingHours);
+console.log(values);
+
+//entire object
+const entries = Object.entries(openingHours);
+console.log(entries);
+
+//key and object --> object/  key and value -->arrays
+for (const [key, { open, close }] of entries) {
+  console.log(`on ${key} we open at ${open} and close at ${close}`);
+}
