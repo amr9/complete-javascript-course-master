@@ -238,3 +238,49 @@ console.log(entries);
 for (const [key, { open, close }] of entries) {
   console.log(`on ${key} we open at ${open} and close at ${close}`);
 }
+
+//sets
+const orderSet = new Set([
+  'pizza',
+  'pasta',
+  'risotto',
+  'pasta',
+  'risotto',
+  'pizza',
+  'pizza',
+]);
+
+console.log(orderSet);
+console.log(typeof orderSet);
+
+console.log(orderSet.size);
+console.log(orderSet.has('pizza'));
+
+orderSet.add('garlic bread');
+orderSet.add('garlic bread');
+orderSet.delete('risotto');
+// orderSet.clear();
+console.log(orderSet);
+
+for (const order of orderSet) console.log(order);
+
+const commonFoods = italianFoods.intersection(mexicanFoods);
+console.log('intersection:: ', commonFoods);
+console.log([...commonFoods]);
+
+const italianMexicanFusion = italianFoods.union(mexicanFoods);
+console.log('fusion :', italianMexicanFusion);
+
+const uniqueItalianFoods = italianFoods.difference(mexicanFoods);
+console.log(uniqueItalianFoods);
+
+const uniqueMexicanFoods = mexicanFoods.difference(italianFoods);
+for (const food of uniqueMexicanFoods) {
+  console.log('uniques of both', uniqueItalianFoods.add(food));
+}
+console.log('spread of sets', ...uniqueMexicanFoods);
+const uniqueItalianFoodsAndMexicanFoods =
+  italianFoods.symmetricDifference(mexicanFoods);
+console.log(uniqueItalianFoodsAndMexicanFoods);
+
+console.log(mexicanFoods.isDisjointFrom(italianFoods));
