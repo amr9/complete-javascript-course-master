@@ -141,29 +141,50 @@
 // console.log(scorers);
 //challenge 3
 
-const gameEvents = new Map([
-  [17, '⚽️ GOAL'],
-  [36, '🔁 Substitution'],
-  [47, '⚽️ GOAL'],
-  [61, '🔁 Substitution'],
-  [64, '🔶 Yellow card'],
-  [69, '🔴 Red card'],
-  [70, '🔁 Substitution'],
-  [72, '🔁 Substitution'],
-  [76, '⚽️ GOAL'],
-  [80, '⚽️ GOAL'],
-  [92, '🔶 Yellow card'],
-]);
-const events = [...new Set(gameEvents.values())];
-console.log(events);
+// const gameEvents = new Map([
+//   [17, '⚽️ GOAL'],
+//   [36, '🔁 Substitution'],
+//   [47, '⚽️ GOAL'],
+//   [61, '🔁 Substitution'],
+//   [64, '🔶 Yellow card'],
+//   [69, '🔴 Red card'],
+//   [70, '🔁 Substitution'],
+//   [72, '🔁 Substitution'],
+//   [76, '⚽️ GOAL'],
+//   [80, '⚽️ GOAL'],
+//   [92, '🔶 Yellow card'],
+// ]);
+// const events = [...new Set(gameEvents.values())];
+// console.log(events);
 
-gameEvents.delete(64);
+// gameEvents.delete(64);
 
-console.log(gameEvents);
+// console.log(gameEvents);
 
-const sizeOfMap = gameEvents.size;
-console.log(`An event happened, on average, every ${90 / sizeOfMap} minutes`);
+// const sizeOfMap = gameEvents.size;
+// console.log(`An event happened, on average, every ${90 / sizeOfMap} minutes`);
 
-for (const [key, value] of gameEvents) {
-  console.log(`[${key <= 45 ? 'FIRST HALF' : 'SECOND HALF'}] ${key}: ${value}`);
+// for (const [key, value] of gameEvents) {
+//   console.log(`[${key <= 45 ? 'FIRST HALF' : 'SECOND HALF'}] ${key}: ${value}`);
+// }
+
+//challenge 4
+const textArea = [
+  'underscore_case',
+  ' first_name',
+  'Some_Variable ',
+  '  calculate_AGE',
+  'delayed_departure',
+];
+
+let newTextaArea = '';
+for (const [index, str] of textArea.entries()) {
+  const trimed = str.trim();
+  const lowered = trimed.toLowerCase();
+  const splited = lowered.split('_');
+  const camelize =
+    splited[0] + splited[1].replace(splited[1][0], splited[1][0].toUpperCase());
+  const padded = camelize.padEnd(20, ' ');
+  newTextaArea += padded + `${'✅'.repeat(index + 1)}\n`;
 }
+console.log(newTextaArea);
