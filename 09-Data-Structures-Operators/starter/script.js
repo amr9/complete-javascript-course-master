@@ -344,4 +344,30 @@ for (const [key, value] of question) {
 // console.log(question.get(answer === question.get('correct')));
 
 //convert map to array
-console.log(...question);
+console.log([...question]);
+
+//flight
+
+// 🔴 Delayed Departure from FAO to TXL (11h25)
+//              Arrival from BRU to FAO (11h45)
+//   🔴 Delayed Arrival from HEL to FAO (12h05)
+//            Departure from FAO to LIS (12h30)
+
+const splitOnPlus = flights.split('+');
+console.log(splitOnPlus);
+let Display = '';
+for (const [i, value] of splitOnPlus.entries()) {
+  const splitOnSemiColone = value.split(';');
+
+  let flightStatus = splitOnSemiColone[0].replaceAll('_', ' ');
+  if (flightStatus.includes('Delayed')) {
+    flightStatus = '🔴' + flightStatus;
+  }
+  flightStatus = flightStatus.padStart(20);
+  const placeOneUpper = splitOnSemiColone[1].slice(0, 3).toUpperCase();
+  const placeTwoUpper = splitOnSemiColone[2].slice(0, 3).toUpperCase();
+  const time = splitOnSemiColone[3].replace(':', 'h');
+  const line = `${flightStatus} from ${placeOneUpper} to ${placeTwoUpper} (${time}) \n`;
+  Display += line;
+}
+console.log(Display);
