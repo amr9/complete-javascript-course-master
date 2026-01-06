@@ -96,3 +96,10 @@ const tax = function (rate) {
 };
 const vat = tax(0.23);
 console.log(vat(100));
+//IIFE (imediatly invoked function expression) it is for calling functuin once or we want to create var block scope
+//which it is not used anymore since let and const are block scoped (data encapsulation)
+(function () {
+  console.log('This will only run once');
+})();
+
+(() => console.log('This will only run once'))();
