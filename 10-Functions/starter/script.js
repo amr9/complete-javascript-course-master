@@ -103,3 +103,53 @@ console.log(vat(100));
 })();
 
 (() => console.log('This will only run once'))();
+
+//closures
+const secureBooking = function () {
+  let passengerCount = 0;
+  return function () {
+    passengerCount++;
+    console.log(passengerCount);
+  };
+};
+
+const booker = secureBooking();
+booker();
+booker();
+booker();
+console.dir(booker);
+console.dir(greetarr);
+
+let f;
+const g = function () {
+  const a = 23;
+  f = function () {
+    console.log(a * 2);
+  };
+};
+const h = function () {
+  const b = 888;
+  f = function () {
+    console.log(b * 2);
+  };
+};
+g();
+f();
+console.dir(f);
+//re-assign f
+h();
+f();
+console.dir(f);
+
+const boardPassenger = function (n, wait) {
+  const perGroup = n / 3;
+
+  setTimeout(function () {
+    console.log(`we are now boarding all ${n} passengers`);
+    console.log(`there are 3 groups each with ${perGroup} passengers`);
+  }, wait * 1000);
+
+  console.log(`will start bording in ${wait} seconds`);
+};
+const perGroup = 1000;
+boardPassenger(180, 3);
