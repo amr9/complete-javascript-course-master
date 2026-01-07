@@ -47,3 +47,17 @@ document.querySelector('.poll').addEventListener('click', clicker);
 
 poll.displayResults.call({ answers: [5, 2, 3] }, 'string');
 poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] });
+
+//challenge 2
+
+(function () {
+  const header = document.querySelector('h1');
+  header.style.color = 'red';
+
+  const changeBlue = function () {
+    header.style.color = 'blue';
+  };
+
+  document.querySelector('body').addEventListener('click', changeBlue);
+  console.dir(changeBlue);
+})();
