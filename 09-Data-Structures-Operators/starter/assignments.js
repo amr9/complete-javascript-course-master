@@ -313,7 +313,7 @@ const printBookAuthorsCount = function (title, ...authors) {
 };
 
 printBookAuthorsCount('Algorithms', 'Robert Sedgewick', 'Kevin Wayne');
-
+console.log('___________');
 //Short Circuiting (&& and ||)
 //5.1
 const hasExamplesInJava = function (book) {
@@ -327,3 +327,201 @@ hasExamplesInJava(books[1]);
 for (const book of books) {
   book.onlineContent && console.log(`"${book.title}" provides online content`);
 }
+console.log('___________');
+//The Nullish Coalescing Operator
+//6.1
+for (const book of books) {
+  book.onlineContent ??
+    console.log(`"${book.title}" provides no data about its online content`);
+}
+console.log('___________');
+//Logical Assignments Operators
+//7.1
+for (const book of books) {
+  console.log((book.edition ??= 1));
+}
+console.log('___________');
+
+//7.2
+for (const book of books) {
+  console.log((book.highlighted &&= !(book.thirdParty.goodreads.rating < 4.2)));
+}
+console.log('___________');
+
+//Looping Arrays: The for-of Loop
+//8.1
+let pageSum = 0;
+for (const book of books) {
+  pageSum += book.pages;
+}
+console.log(pageSum);
+console.log('___________');
+//8.2
+const allAuthors = [];
+for (const book of books) {
+  if (typeof book.author === 'string') {
+    allAuthors.push(book.author);
+  } else {
+    for (const author of book.author) {
+      allAuthors.push(author);
+    }
+  }
+}
+console.log(allAuthors);
+console.log('___________');
+
+//8.3
+for (const [index, auther] of allAuthors.entries()) {
+  console.log(`${index + 1}. ${auther}`);
+}
+console.log('___________');
+
+//Enhanced Object Literals
+//9.1
+const bookData = [
+  ['title', 'Computer Networking: A Top-Down Approach'],
+  ['author', ['James F. Kurose', 'Keith W. Ross']],
+  ['publisher', 'Addison Wesley'],
+];
+
+const newBook = {
+  [bookData[0][0]]: bookData[0][1],
+  [bookData[1][0]]: bookData[1][1],
+  [bookData[2][0]]: bookData[2][1],
+};
+console.log(newBook);
+
+//9.2
+const pages = 880;
+
+const newBook2 = {
+  title: 'The C Programming Language',
+  author: ['Brian W. Kernighan', 'Dennis M. Ritchie'],
+  pages,
+};
+console.log(newBook2);
+console.log('___________');
+
+//Optional Chaining (?.)
+//10.1
+const getFirstKeyword = function (book) {
+  return book.keywords?.[0];
+};
+console.log(getFirstKeyword(books[0]));
+console.log(getFirstKeyword(newBook2));
+console.log('___________');
+//Looping Objects: Object Keys, Values and Entries
+//11.1
+const entries = [];
+for (const value of Object.keys(books[0].thirdParty.goodreads)) {
+  entries.push([value]);
+}
+console.log(entries);
+console.log('___________');
+//11.2
+for (const [index, value] of Object.values(
+  books[0].thirdParty.goodreads
+).entries()) {
+  entries[index].push(value);
+}
+
+console.log(entries);
+console.log('___________');
+//11.3
+const entries2 = Object.entries(books[0].thirdParty.goodreads);
+console.log(entries2);
+console.log('___________');
+//11.4 Already done
+
+//Sets
+//12.1
+const allKeywords = [];
+for (const book of books) {
+  allKeywords.push(...book.keywords);
+}
+console.log(allKeywords);
+console.log('___________');
+//12.2
+const uniqueKeywords = new Set(allKeywords);
+console.log(uniqueKeywords);
+console.log('___________');
+//12.3
+uniqueKeywords.add('coding');
+uniqueKeywords.add('science');
+console.log(uniqueKeywords);
+console.log('___________');
+//12.4
+uniqueKeywords.delete('business');
+console.log(uniqueKeywords);
+console.log('___________');
+//12.5
+const uniqueKeywordsArr = [...uniqueKeywords];
+console.log(uniqueKeywordsArr);
+console.log('___________');
+//12.6
+uniqueKeywords.clear();
+console.log(uniqueKeywords);
+console.log('___________');
+
+//Maps: Fundamentals
+//13.1
+const bookMap = new Map([
+  ['title', 'Clean Code'],
+  ['author', 'Robert C. Martin'],
+]);
+console.log(bookMap);
+console.log('___________');
+
+//13.2
+bookMap.set('pages', 464);
+console.log(bookMap);
+console.log('___________');
+//13.3
+
+{
+  const title = bookMap.get('title');
+  const author = bookMap.get('author');
+  console.log(`${title} by ${author}`);
+  console.log('___________');
+}
+//13.4
+console.log(bookMap.size);
+console.log('___________');
+//13.5
+
+console.log(
+  `${bookMap.has('author') ? 'The author of the book is known' : pass}`
+);
+console.log('___________');
+
+//Maps: Iteration
+//14.1
+const firstBookMap = new Map(Object.entries(books[0]));
+console.log(firstBookMap);
+console.log('___________');
+//14.2
+
+for (const [key, value] of firstBookMap.entries()) {
+  if (typeof value === 'number') {
+    console.log(key);
+  }
+}
+console.log('___________');
+
+//Working with Strings - Part 1
+//15.1
+const isbn = books[0].ISBN;
+console.log(isbn[6], isbn[4], isbn[9], isbn[8]);
+console.log('___________');
+//15.2
+const quote =
+  'A computer once beat me at chess, but it was no match for me at kick boxing';
+console.log(quote.indexOf('chess'));
+//15.3
+console.log(quote.slice(quote.lastIndexOf(' ') + 1));
+//15.4
+const isContributor = function (string) {
+  console.log(`${string.match('(Contributor)') ? true : false}`);
+};
+isContributor('Julie Sussman (Contributor)');
+isContributor('Robert Sedgewick');
