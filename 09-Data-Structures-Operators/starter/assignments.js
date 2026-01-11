@@ -525,3 +525,76 @@ const isContributor = function (string) {
 };
 isContributor('Julie Sussman (Contributor)');
 isContributor('Robert Sedgewick');
+console.log('___________');
+
+//Working with Strings - Part 2
+//16.1
+const normalizeAuthorName = function (name) {
+  const nameArr = name.trim().split(' ');
+  const firstName = nameArr[0].toLowerCase();
+  const lastName = nameArr[1].toLowerCase();
+
+  return [
+    firstName[0].toUpperCase() + [...firstName].splice(1).join(''),
+    lastName[0].toUpperCase() + [...lastName].splice(1).join(''),
+  ];
+};
+
+console.log(...normalizeAuthorName('  JuliE sussMan (Contributor)'));
+console.log('___________');
+//16.2
+const replacment = books[1].title;
+books['newBookTitle'] = replacment.replace('Programs', 'Software');
+console.log(books.newBookTitle);
+console.log('___________');
+//16.3
+const logBookTheme = function (bookstitle) {
+  bookstitle.toLowerCase().startsWith('computer') &&
+    console.log('This book is about computers');
+  bookstitle.toLowerCase().includes('structures') &&
+    bookstitle.toLowerCase().includes('algorithms') &&
+    console.log('This book is about algorithms and data structures');
+  bookstitle.toLowerCase().endsWith('system') ||
+    (bookstitle.toLowerCase().endsWith('systems') &&
+      !title.includes('operating') &&
+      console.log(
+        'This book is about some systems, but definitely not about operating systems'
+      ));
+};
+logBookTheme(books[2].title);
+console.log('___________');
+
+//Working with Strings - Part 3
+//17.1
+const bookCategories =
+  'science;computing;computer science;algorithms;business;operating systems;networking;electronics';
+const logBookCategories = function (bookCategories) {
+  for (const v of bookCategories.split(';')) {
+    console.log(v);
+  }
+};
+logBookCategories(bookCategories);
+//17.2
+const stringArrayKeywords = [];
+const getKeywordsAsString = function (books) {
+  for (const book of books) {
+    stringArrayKeywords.push(...book.keywords);
+  }
+  const removeDuplicates = new Set(stringArrayKeywords);
+  console.log([...removeDuplicates].join(';'));
+};
+getKeywordsAsString(books);
+//17.3
+const bookChapters = [
+  ['The Basics', 14],
+  ['Sorting', 254],
+  ['Searching', 372],
+  ['Graphs', 526],
+  ['Strings', 706],
+];
+const logBookChapters = function (chapters) {
+  for (const chapter of chapters) {
+    console.log(chapter[0].padEnd(20, '_') + ' ' + chapter[1]);
+  }
+};
+logBookChapters(bookChapters);
