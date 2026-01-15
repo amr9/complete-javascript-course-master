@@ -167,6 +167,31 @@ btnTransfer.addEventListener('click', function (e) {
     inputTransferAmount.blur();
   }
 });
+
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+  if (
+    Number(inputClosePin.value) === currentAccount.pin &&
+    inputCloseUsername.value === currentAccount.username
+  ) {
+    accounts.splice(
+      accounts.findIndex(acc => acc.username === currentAccount.username),
+      1
+    );
+    containerApp.style.opacity = 0;
+  }
+  inputCloseUsername.value = inputClosePin.value = '';
+});
+
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+  const loan = Number(inputLoanAmount.value);
+  if (loan > 0 && currentAccount.movements.some(mov => mov >= 0.1 * loan)) {
+    currentAccount.movements.push(loan);
+    updateUi(currentAccount);
+  }
+  inputLoanAmount.value = '';
+});
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -304,3 +329,33 @@ for (const acc of accounts) {
     break;
   }
 }
+console.log(movements);
+const lastWithdrawl = movements.findLast(mov => mov < 0);
+console.log(lastWithdrawl);
+
+console.log(
+  `your lastest large movement was ${
+    movements.length - movements.findLastIndex(mov => mov > 1000)
+  } movements ago`
+);
+
+console.log(movements.some(mov => mov > 0));
+
+console.log(movements.every(mov => mov > 0));
+console.log(account4.movements.every(mov => mov > 0));
+
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+console.log(arr.flat());
+console.log(arrDeep.flat(2));
+
+const allMovements = accounts
+  .map(acc => acc.movements)
+  .flat()
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(allMovements);
+
+const allMovements2 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(allMovements2);
