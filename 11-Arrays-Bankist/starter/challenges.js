@@ -132,7 +132,6 @@ const calcAverageHumanAgeChain = ages => {
 
 console.log(calcAverageHumanAgeChain([5, 2, 4, 1, 15, 8, 3]));
 console.log(calcAverageHumanAgeChain([16, 6, 10, 5, 6, 1, 4]));
-
 // Coding Challenge #4
 const breeds = [
   {
@@ -205,22 +204,25 @@ TEST DATA:
 const huskyWeight = breeds.find(breed => breed.breed === 'Husky').averageWeight;
 console.log(huskyWeight);
 
-const dogBothActivities = breeds.find(breed =>
-  breed.activities.includes('running', 'fetch')
+const dogBothActivities = breeds.find(
+  breed =>
+    breed.activities.includes('fetch') && breed.activities.includes('running')
 );
-console.log(dogBothActivities);
+console.log('dogs run and fetch', dogBothActivities);
 
 const allActivities = breeds.flatMap(breed => breed.activities);
 console.log(allActivities);
 
-const uniqueActivities = new Set(allActivities);
+const uniqueActivities = [...new Set(allActivities)];
 console.log(uniqueActivities);
 
-const swimmingAdjacent = new Set(
-  breeds
-    .filter(breed => breed.activities.includes('swimming'))
-    .flatMap(breed => breed.activities)
-);
+const swimmingAdjacent = [
+  ...new Set(
+    breeds
+      .filter(breed => breed.activities.includes('swimming'))
+      .flatMap(breed => breed.activities)
+  ),
+];
 
 console.log(swimmingAdjacent);
 
