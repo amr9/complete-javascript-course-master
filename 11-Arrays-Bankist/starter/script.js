@@ -370,3 +370,36 @@ const allMovements2 = accounts
   .flatMap(acc => acc.movements)
   .reduce((acc, mov) => acc + mov, 0);
 console.log(allMovements2);
+
+//sort mutates the array
+const arrStr = ['amr', 'emad', 'ziad', 'ramez', 'ashraf', 'ramy'];
+console.log(arrStr.sort());
+const arrNum = [...movements];
+//assending
+console.log(arrNum.sort((a, b) => a - b));
+
+//descending
+console.log(arrNum.sort((a, b) => b - a));
+
+//groupby
+const groupedMovements = Object.groupBy(movements, mov =>
+  mov > 0 ? 'deposits' : 'withdrawls'
+);
+console.log(groupedMovements);
+
+const groupedByActivity = Object.groupBy(accounts, acc => {
+  const movementCount = acc.movements.length;
+
+  if (movementCount >= 8) {
+    return 'very Active';
+  }
+  if (movementCount >= 4) {
+    return 'Active';
+  }
+  if (movementCount >= 1) {
+    return 'moderate';
+  }
+  return 'inactive';
+});
+
+console.log(groupedByActivity);
