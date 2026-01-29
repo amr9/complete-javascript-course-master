@@ -6,6 +6,10 @@ const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+const nav = document.querySelector('.nav');
 
 ///////////////////////////////////////
 // Modal window
@@ -42,7 +46,7 @@ btnScrollTo.addEventListener('click', function (e) {
   const s1coords = section1.getBoundingClientRect();
   console.log('s1coords', s1coords);
 
-  console.log('buttons', e.target.getBoundingClientRect());
+  console.log('button link', e.target.getBoundingClientRect());
 
   console.log('current scroll x and y', window.pageXOffset, window.pageYOffset);
 
@@ -88,94 +92,224 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
   const id = e.target.getAttribute('href');
   document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' });
 });
-////////////////////////////////
-////////////////////////////////
-////////////////////////////////
 
-console.log(document.documentElement);
+//tabbed component
 
-console.log(document.head);
-console.log(document.body);
+tabsContainer.addEventListener('click', function (e) {
+  const clicked = e.target.closest('.operations__tab');
+  console.log(clicked);
+
+  if (!clicked) return;
+
+  //active tab
+  tabs.forEach(t => t.classList.remove('operations__tab--active'));
+  clicked.classList.add('operations__tab--active');
+
+  //activate content area
+
+  tabsContent.forEach(c => c.classList.remove('operations__content--active'));
+
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add('operations__content--active');
+});
+
+//menu fade animation
+
+const handleHover = function (e) {
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target;
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
+    siblings.forEach(el => {
+      if (el !== link) el.style.opacity = this;
+    });
+    logo.style.opacity = this;
+  }
+};
+
+//passing arguments into handler
+nav.addEventListener('mouseover', handleHover.bind(0.5));
+nav.addEventListener('mouseout', handleHover.bind(1));
+
+//sticky nav old not optimum
+// const initialCoords = section1.getBoundingClientRect();
+// console.log(initialCoords);
+
+// window.addEventListener('scroll', function (e) {
+//   if (this.window.scrollY > initialCoords.top) {
+//     nav.classList.add('sticky');
+//   } else {
+//     nav.classList.remove('sticky');
+//   }
+// });
+
+//sticky nav new efficient
+// const obsCallBack = function (entries, observer) {
+//   entries.forEach(entry => {
+//     console.log(entry);
+//   });
+// };
+
+// const onbsOptions = {
+//   root: null,
+//   threshold: [0, 0.2],
+// };
+// const observer = new IntersectionObserver(obsCallBack, onbsOptions);
+// observer.observe(section1);
 
 const header = document.querySelector('.header');
+const navHeight = nav.getBoundingClientRect().height;
 
+const stickyNav = function (entries) {
+  const [entry] = entries;
+
+  if (!entry.isIntersecting) {
+    nav.classList.add('sticky');
+  } else {
+    nav.classList.remove('sticky');
+  }
+};
+
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHeight}px`,
+});
+
+headerObserver.observe(header);
+
+//reveal elements on scroll
 const allSections = document.querySelectorAll('.section');
 
-console.log(allSections);
+const revealSection = function (entries, observer) {
+  // console.log(entries); //all (entries/intersection) are observed at the reload of dom or 1st dom creation of observers
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
 
-document.getElementById('section--1');
-const allButtons = document.getElementsByTagName('button');
-console.log(allButtons);
-
-console.log(document.getElementsByClassName('btn'));
-
-//creating and inserting elements
-//.insertAdjacentHtml()
-
-const message = document.createElement('div');
-message.classList.add('cookie-message');
-
-// message.textContent = 'We use cookies for improved analytics';
-
-message.innerHTML = `We use cookied for improved functionality and analytics. 
-  <button class="btn btn--close-cookie">Got it!</button>`;
-header.prepend(message); //prepend and append inserts element inside the header where header is the parent
-// header.append(message.cloneNode(true)); //makes multiple copies of html element
-
-header.after(message); //before and after inserts object before and after the header as siblings
-// header.after(message);
-
-//delete element
-document
-  .querySelector('.btn--close-cookie')
-  .addEventListener('click', function () {
-    message.remove();
+    entry.target.classList.remove('section--hidden');
+    observer.unobserve(entry.target);
   });
+};
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold: 0.15,
+});
 
-//styles
-message.style.backgroundColor = 'blue';
+allSections.forEach(section => {
+  sectionObserver.observe(section);
+  section.classList.add('section--hidden');
+});
 
-console.log(message.style.height); //this is bec. message.style find the inline styles only
+//lazy loading images
+const images = document.querySelectorAll('img[data-src]');
+const lazyLoader = function (entries, observer) {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.setAttribute('src', entry.target.dataset.src);
 
-console.log(message.style.backgroundColor);
+    entry.target.addEventListener('load', function (e) {
+      entry.target.classList.remove('lazy-img');
+    });
 
-console.log(getComputedStyle(message).color);
+    observer.unobserve(entry.target);
+  });
+};
+const imgObserver = new IntersectionObserver(lazyLoader, {
+  root: null,
+  threshold: 0,
+  rootMargin: '200px',
+});
 
-message.style.height =
-  Number.parseFloat(getComputedStyle(message).height) + 50 + 'px';
+images.forEach(img => imgObserver.observe(img));
+////////////////////////////////
+////////////////////////////////
+////////////////////////////////
 
-document.documentElement.style.setProperty('--color-primary', 'orangered');
+// console.log(document.documentElement);
 
-//attributes
-const logo = document.querySelector('.nav__logo');
-console.log(logo.alt);
-console.log(logo.src);
-console.log(logo.className);
+// console.log(document.head);
+// console.log(document.body);
 
-logo.alt = 'wassup wassup';
+// const header = document.querySelector('.header');
 
-//non standard
-console.log(logo.desginer);
-console.log(logo.getAttribute('designer'));
+// const allSections = document.querySelectorAll('.section');
 
-logo.setAttribute('company', 'bankist');
+// console.log(allSections);
 
-console.log(logo.getAttribute('src'));
+// document.getElementById('section--1');
+// const allButtons = document.getElementsByTagName('button');
+// console.log(allButtons);
 
-const link = document.querySelector('.nav__link--btn');
+// console.log(document.getElementsByClassName('btn'));
 
-console.log(link.href);
+// //creating and inserting elements
+// //.insertAdjacentHtml()
 
-console.log(link.getAttribute('href'));
+// const message = document.createElement('div');
+// message.classList.add('cookie-message');
 
-//data attributes
-console.log(logo.dataset.versionNumber);
+// // message.textContent = 'We use cookies for improved analytics';
 
-//classes
-logo.classList.add('c');
-logo.classList.remove('c');
-logo.classList.toggle('c');
-logo.classList.contains('c');
+// message.innerHTML = `We use cookied for improved functionality and analytics.
+//   <button class="btn btn--close-cookie">Got it!</button>`;
+// header.prepend(message); //prepend and append inserts element inside the header where header is the parent
+// // header.append(message.cloneNode(true)); //makes multiple copies of html element
+
+// header.after(message); //before and after inserts object before and after the header as siblings
+// // header.after(message);
+
+// //delete element
+// document
+//   .querySelector('.btn--close-cookie')
+//   .addEventListener('click', function () {
+//     message.remove();
+//   });
+
+// //styles
+// message.style.backgroundColor = 'blue';
+
+// console.log(message.style.height); //this is bec. message.style find the inline styles only
+
+// console.log(message.style.backgroundColor);
+
+// console.log(getComputedStyle(message).color);
+
+// message.style.height =
+//   Number.parseFloat(getComputedStyle(message).height) + 50 + 'px';
+
+// document.documentElement.style.setProperty('--color-primary', 'orangered');
+
+// //attributes
+// const logo = document.querySelector('.nav__logo');
+// console.log(logo.alt);
+// console.log(logo.src);
+// console.log(logo.className);
+
+// logo.alt = 'wassup wassup';
+
+// //non standard
+// console.log(logo.desginer);
+// console.log(logo.getAttribute('designer'));
+
+// logo.setAttribute('company', 'bankist');
+
+// console.log(logo.getAttribute('src'));
+
+// const link = document.querySelector('.nav__link--btn');
+
+// console.log(link.href);
+
+// console.log(link.getAttribute('href'));
+
+// //data attributes
+// console.log(logo.dataset.versionNumber);
+
+// //classes
+// logo.classList.add('c');
+// logo.classList.remove('c');
+// logo.classList.toggle('c');
+// logo.classList.contains('c');
 
 // const alertH1 = function (e) {
 //   alert('addeventlistener: mouse hovered over h1'); //this is the way
