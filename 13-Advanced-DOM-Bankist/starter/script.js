@@ -10,7 +10,16 @@ const tabs = document.querySelectorAll('.operations__tab');
 const tabsContainer = document.querySelector('.operations__tab-container');
 const tabsContent = document.querySelectorAll('.operations__content');
 const nav = document.querySelector('.nav');
-
+const header = document.querySelector('.header');
+const navHeight = nav.getBoundingClientRect().height;
+const allSections = document.querySelectorAll('.section');
+const images = document.querySelectorAll('img[data-src]');
+const slides = document.querySelectorAll('.slide');
+const btnLeft = document.querySelector('.slider__btn--left');
+const btnRight = document.querySelector('.slider__btn--right');
+const slider = document.querySelector('.slider');
+let currentSlide = 0;
+const maxSlide = slides.length;
 ///////////////////////////////////////
 // Modal window
 
@@ -158,9 +167,6 @@ nav.addEventListener('mouseout', handleHover.bind(1));
 // const observer = new IntersectionObserver(obsCallBack, onbsOptions);
 // observer.observe(section1);
 
-const header = document.querySelector('.header');
-const navHeight = nav.getBoundingClientRect().height;
-
 const stickyNav = function (entries) {
   const [entry] = entries;
 
@@ -180,8 +186,6 @@ const headerObserver = new IntersectionObserver(stickyNav, {
 headerObserver.observe(header);
 
 //reveal elements on scroll
-const allSections = document.querySelectorAll('.section');
-
 const revealSection = function (entries, observer) {
   // console.log(entries); //all (entries/intersection) are observed at the reload of dom or 1st dom creation of observers
   entries.forEach(entry => {
@@ -202,7 +206,6 @@ allSections.forEach(section => {
 });
 
 //lazy loading images
-const images = document.querySelectorAll('img[data-src]');
 const lazyLoader = function (entries, observer) {
   entries.forEach(entry => {
     if (!entry.isIntersecting) return;
@@ -222,6 +225,34 @@ const imgObserver = new IntersectionObserver(lazyLoader, {
 });
 
 images.forEach(img => imgObserver.observe(img));
+
+//slider implementation
+const goToSlide = function (slide) {
+  slides.forEach((s, i) => {
+    s.style.transform = `translateX(${100 * (i - slide)}%)`;
+  });
+};
+
+goToSlide(0);
+
+btnRight.addEventListener('click', function (e) {
+  if (currentSlide === maxSlide - 1) {
+    currentSlide = 0;
+  } else {
+    currentSlide++;
+  }
+  goToSlide(currentSlide);
+});
+
+btnLeft.addEventListener('click', function (e) {
+  if (currentSlide === 0) {
+    currentSlide = maxSlide - 1;
+  } else {
+    currentSlide--;
+  }
+
+  goToSlide(currentSlide);
+});
 ////////////////////////////////
 ////////////////////////////////
 ////////////////////////////////
